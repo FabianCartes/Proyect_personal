@@ -28,6 +28,12 @@ export const User = new EntitySchema({
       type: "varchar",
       nullable: true, // por ahora 
     },
+    role: {
+      type: "enum",
+      enum: ["user", "admin"],
+      default: "user",
+      nullable: false,
+    },
     profilePictureUrl: {
       type: "varchar",
       nullable: true, // por ahora

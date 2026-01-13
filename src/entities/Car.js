@@ -31,14 +31,26 @@ export const Car = new EntitySchema({
       nullable: true,
     },
     description: {
-      type: "text", 
+      type: "text",
       nullable: true,
     },
     specs: {
       type: "jsonb", // 'jsonb' para guardar objetos en pg
       nullable: true,
     },
+    versions: {
+      type: "jsonb", // Array de versiones: [{ name: "GLX", specs: {...} }]
+      nullable: true,
+    },
     mainImageUrl: {
+      type: "varchar",
+      nullable: true,
+    },
+    chileautosUrl: {
+      type: "varchar",
+      nullable: true,
+    },
+    marketplaceUrl: {
       type: "varchar",
       nullable: true,
     },
@@ -68,6 +80,13 @@ export const Car = new EntitySchema({
       type: "one-to-many",
       target: "Favorite_Car",
       inverseSide: "car",
+    },
+    createdBy: {
+      type: "many-to-one",
+      target: "User",
+      joinColumn: true,
+      nullable: true,
+      eager: false,
     },
   },
 });

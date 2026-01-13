@@ -35,14 +35,27 @@ export const Photo = new EntitySchema({
     },
     car_id: {
       type: "int",
+      nullable: true,
+    },
+    review_id: {
+      type: "int",
+      nullable: true,
     }
   },
-  relations: { //cada foto es de un auto
+  relations: { //cada foto es de un auto o de una reseña
     car: {
       type: "many-to-one",
       target: "Car",
       joinColumn: {
         name: "car_id",
+      },
+      onDelete: "CASCADE",
+    },
+    review: {
+      type: "many-to-one",
+      target: "Review",
+      joinColumn: {
+        name: "review_id",
       },
       onDelete: "CASCADE",
     },

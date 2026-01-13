@@ -33,6 +33,10 @@ export const Review = new EntitySchema({
       length: 50,
       nullable: false,
     },
+    rating: {
+      type: "int",
+      nullable: true,
+    },
     created_at: {
       type: "timestamp",
       createDate: true,
@@ -82,11 +86,18 @@ export const Review = new EntitySchema({
     failureTags: {
       type: "many-to-many",
       target: "FailureTag",
+      cascade: true,
       joinTable: {
-        name: "review_failure_tags", 
+        name: "review_failure_tags",
         joinColumn: { name: "review_id", referencedColumnName: "id" },
         inverseJoinColumn: { name: "tag_id", referencedColumnName: "id" },
       },
+    },
+    //tiene muchas fotos
+    photos: {
+      type: "one-to-many",
+      target: "Photo",
+      inverseSide: "review",
     },
   },
 });
