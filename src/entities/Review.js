@@ -28,6 +28,10 @@ export const Review = new EntitySchema({
       type: "text",
       nullable: true,
     },
+    specificVersion: {
+      type: "varchar",
+      nullable: true,
+    },
     type: { // POSITIVO, NEGATIVO, NEUTRAL
       type: "varchar",
       length: 50,

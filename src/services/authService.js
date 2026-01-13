@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { envs } from "../config/configEnv.js";
 import { UserService } from "./userService.js";
+import { emailService } from "./emailService.js";
 
 export class AuthService {
     constructor() {
@@ -19,6 +20,8 @@ export class AuthService {
             ...userData,
             password: hashedPassword,
         });
+
+        await emailService.sendWelcomeEmail(newUser.email, newUser.username);
 
         const token = this.generateToken(newUser);
         return { user: newUser, token };

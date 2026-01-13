@@ -20,10 +20,17 @@ export class ReviewController {
             console.log('Review creation request body:', req.body);
             console.log('User from token:', req.user);
 
-            const { failureTags, photos, car_id, ...reviewData } = req.body;
+            const { failureTags, photos, car_id, specificVersion, ...reviewData } = req.body;
+
+            // Validar maximo de fotos
+            if (photos && photos.length > 5) {
+                return res.status(400).json({ message: 'No puedes subir más de 5 fotos por reseña.' });
+            }
+
             // Asignar el usuario del token al review y mapear car_id
             const data = {
                 ...reviewData,
+                specificVersion: specificVersion,
                 user: { id: req.user.id },
                 car: { id: car_id }
             };
